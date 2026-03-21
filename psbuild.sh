@@ -4,9 +4,8 @@ readonly VERSION_ROS1="ROS1"
 readonly VERSION_ROS2="ROS2"
 readonly VERSION_HUMBLE="humble"
 
-pushd `pwd` > /dev/null
-cd `dirname $0`
 echo "Working Path: "`pwd`
+
 
 ROS_VERSION=""
 ROS_HUMBLE=""
@@ -58,7 +57,7 @@ if [ $ROS_VERSION = ${VERSION_ROS1} ]; then
     catkin_make -DROS_EDITION=${VERSION_ROS1}
 elif [ $ROS_VERSION = ${VERSION_ROS2} ]; then
     cd ../../../
-    colcon build --symlink-install --cmake-args -DROS_EDITION=${VERSION_ROS2} -DHUMBLE_ROS=${ROS_HUMBLE}
+    colcon build --symlink-install --cmake-args -DROS_EDITION=${VERSION_ROS2} -DHUMBLE_ROS=${ROS_HUMBLE} --packages-select $2 $3 $4 
 fi
 popd > /dev/null
 
